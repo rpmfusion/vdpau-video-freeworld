@@ -1,8 +1,8 @@
-%global preversion .pre4
+#global preversion .pre6
 
 Name:		vdpau-video-freeworld
 Version:	0.7.3
-Release:	0.2%{?preversion}%{?dist}
+Release:	1%{?preversion}%{?dist}
 Summary:	VDPAU backend for Video Acceleration (VA) API
 Group:		System Environment/Libraries
 License:	GPLv2+
@@ -10,7 +10,7 @@ URL:		http://www.splitted-desktop.com/~gbeauchesne/vdpau-video/
 Source0:	http://www.splitted-desktop.com/~gbeauchesne/vdpau-video/vdpau-video-%{version}%{?preversion}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	libtool
-BuildRequires:	libva-freeworld-devel
+BuildRequires:	libva-devel >= 1.0.10
 BuildRequires:	libvdpau-devel
 BuildRequires:	mesa-libGL-devel
 
@@ -25,11 +25,13 @@ that supports the VDPAU API.
 
 %build
 %configure --enable-glx
+
 make %{?_smp_mflags}
 
 %install
 rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
+find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 %clean
 rm -rf %{buildroot}
@@ -37,9 +39,15 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING NEWS README
-%{_libdir}/va/drivers
+%{_libdir}/dri/*.so
 
 %changelog
+* Fri Mar 04 2011 Nicolas Chauvet <kwizart@gmail.com> - 0.7.3-1
+- Update to 0.7.3
+
+* Mon Feb 21 2011 Nicolas Chauvet <kwizart@gmail.com> - 0.7.3-0.3.pre6
+- Update to 0.7.3-pre6
+
 * Sun Jan 09 2011 Nicolas Chauvet <kwizart@gmail.com> - 0.7.3-0.2.pre4
 - Update to 0.7.3 pre4
 
