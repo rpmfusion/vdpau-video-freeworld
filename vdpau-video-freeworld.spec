@@ -2,7 +2,7 @@
 
 Name:		vdpau-video-freeworld
 Version:	0.7.3
-Release:	1%{?preversion}%{?dist}
+Release:	2%{?preversion}%{?dist}
 Summary:	VDPAU backend for Video Acceleration (VA) API
 Group:		System Environment/Libraries
 License:	GPLv2+
@@ -10,9 +10,10 @@ URL:		http://www.splitted-desktop.com/~gbeauchesne/vdpau-video/
 Source0:	http://www.splitted-desktop.com/~gbeauchesne/vdpau-video/vdpau-video-%{version}%{?preversion}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:	libtool
-BuildRequires:	libva-devel >= 1.0.10
+BuildRequires:	libva-freeworld-devel
 BuildRequires:	libvdpau-devel
 BuildRequires:	mesa-libGL-devel
+Requires:  libva-freeworld
 
 %description
 Vdpau-video is a VDPAU backend for VA API. It allows applications which
@@ -39,9 +40,13 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %doc AUTHORS COPYING NEWS README
-%{_libdir}/dri/*.so
+%dir %{_libdir}/va/drivers
+%{_libdir}/va/drivers/*.so
 
 %changelog
+* Mon Jul 11 2011 Nicolas Chauvet <kwizart@gmail.com> - 0.7.3-2
+- Branch for EL-6
+
 * Fri Mar 04 2011 Nicolas Chauvet <kwizart@gmail.com> - 0.7.3-1
 - Update to 0.7.3
 
