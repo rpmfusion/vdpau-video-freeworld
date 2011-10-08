@@ -2,7 +2,7 @@
 
 Name:		vdpau-video-freeworld
 Version:	0.7.3
-Release:	2%{?preversion}%{?dist}
+Release:	2%{?preversion}%{?dist}.1
 Summary:	VDPAU backend for Video Acceleration (VA) API
 Group:		System Environment/Libraries
 License:	GPLv2+
@@ -44,6 +44,9 @@ rm -rf %{buildroot}
 %{_libdir}/va/drivers/*.so
 
 %changelog
+* Sat Oct 08 2011 Nicolas Chauvet <kwizart@gmail.com> - 0.7.3-2.1
+- Rebuilt for target i686
+
 * Mon Jul 11 2011 Nicolas Chauvet <kwizart@gmail.com> - 0.7.3-2
 - Branch for EL-6
 
